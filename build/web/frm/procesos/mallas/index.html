@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SistemaEducativo | Permisos</title>
+        <link rel="icon" type="image/png" href="../../../favicon.png" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../../../css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../../css/estilos.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <script>
+            function sololetras(e) {
+                var e;
+                key = e.keyCode || e.which;
+                tecla = String.fromCharCode(key).toLowerCase();
+                letras = "  áéíóúqwertyuiopasdfghjklñzxcvbnm";
+                especiales = [8, 37, 39, 46];
+
+                tecla_especial = false;
+                for (var i in especiales) {
+                    if (key === especiales[i]) {
+                        tecla_especial = true;
+                        break;
+                    }
+                }
+
+                if (letras.indexOf(tecla) === -1 && !tecla_especial)
+                    return false;
+            }
+        </script>
+
+        <script>
+            function SoloNumPositivos(e) {
+                key = e.keyCode || e.which;
+                tecla = String.fromCharCode(key).toLowerCase();
+                letras = "0123456789";
+                especiales = [8, 37, 39, 46];
+
+                tecla_especial = false;
+                for (var i in especiales) {
+                    if (key === especiales[i]) {
+                        tecla_especial = true;
+                        break;
+                    }
+                }
+
+                if (letras.indexOf(tecla) === -1 && !tecla_especial)
+                    return false;
+            }
+        </script>
+        <div id="confirmar"></div>
+        <div id="buscar"></div>
+        <div id="panelLinea" class="panel panel-primary">
+            <div class="panel-heading centrado">Malla Curricular | Detalle</div>
+            <div class="panel-body">
+                <form id="formLinea">
+
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Id Linea</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_detallemalla" name="id_detallemalla" type="text" class="form-control input-sm" placeholder="Id" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Asignatura_Id</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_asignatura" name="id_asignatura" type="text"
+                                   class="form-control input-sm" placeholder="Id"
+                                   onkeypress="return SoloNumPositivos(event)">
+                        </div>  
+                        <div class="col-md-1">
+                            <button id="botonBuscarIdAsignatura" type="button" class="btn
+                                    btn-primary btn-sm"><span
+                                    class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Asignatura</span>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="nombre_asignatura" name="nombre_asignatura" type="text"
+                                   class="form-control input-sm"
+                                   placeholder="Nombre de la Asignatura" onkeyup="this.value =
+                                                   this.value.toUpperCase()"
+                                onkeypress="return sololetras(event)" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Carga Horaria</span>
+                        </div>
+                        <div class="col-md-2">
+                            <input id="cargahoraria_total" name="cargahoraria_total" type="text" class="form-control input-sm"
+                                   onkeyup="this.value =
+                                                   this.value.toUpperCase()" placeholder="Carga Horaria total de la asignatura">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="panel-footer centrado">
+                <button id="botonAgregarLinea" type="button" class="btn btn-primary btn-sm">Agregar</button>
+                <button id="botonModificarLinea" type="button" class="btn btn-primary btn-sm">Modificar</button>
+                <button id="botonEliminarLinea" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#confirmarEliminarLinea">Eliminar</button>
+                <button id="botonSalirLinea" type="button" class="btn btn-primary btn-sm">Salir</button>
+            </div>
+        </div>
+        <div id="panelPrograma" class="panel panel-primary">
+            <div class="panel-heading centrado">Malla Curricular | <span id="snombre_empresa"></span> | <span id="susuario_usuario"></span></div>
+            <div class="panel-body">
+                <form id="formPrograma">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Id</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_malla" name="id_malla" type="text" class="form-control input-sm" placeholder="Id" onkeypress="return SoloNumPositivos(event)">
+                        </div>
+                        <div class="col-md-1">
+                            <button id="botonBuscarIdMalla" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Grado_Id</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_grado" name="id_grado" type="text"
+                                   class="form-control input-sm" placeholder="Id"
+                                   onkeypress="return SoloNumPositivos(event)">
+                        </div>  
+                        <div class="col-md-1">
+                            <button id="botonBuscarIdGrado" type="button" class="btn
+                                    btn-primary btn-sm"><span
+                                    class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Grado</span>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="nombre_grado" name="nombre_grado" type="text"
+                                   class="form-control input-sm"
+                                   placeholder="Nombre del Grado en numero" onkeyup="this.value =
+                                                   this.value.toUpperCase()"
+                                onkeypress="return sololetras(event)" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Especialidad_Id</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_especialidad" name="id_especialidad" type="text"
+                                   class="form-control input-sm" placeholder="Id"
+                                   onkeypress="return SoloNumPositivos(event)">
+                        </div>  
+                        <div class="col-md-1">
+                            <button id="botonBuscarIdEspecialidad" type="button" class="btn
+                                    btn-primary btn-sm"><span
+                                    class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Especialidad</span>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="nombre_especialidad" name="nombre_especialidad" type="text"
+                                   class="form-control input-sm"
+                                   placeholder="Nombre de la Especialidad" onkeyup="this.value =
+                                                   this.value.toUpperCase()"
+                                onkeypress="return sololetras(event)" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Modalidad</span>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="modalidad_malla" name="modalidad_malla" type="text" placeholder="Año de malla" class="form-control input-sm" 
+                                   onkeyup="this.value =
+                                                   this.value.toUpperCase()">
+                        </div>
+                    </div>
+                </form>
+                <div id="detalle" hidden="">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Asignatura</th>
+                                <th>Carga Horaria</th>
+                                <th class="centrado"><button onclick="agregarLinea()" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span></button></th>
+                            </tr>
+                        </thead>
+                        <tbody id="contenidoDetalle">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="panel-footer centrado">
+                <button id="botonAgregar" type="button" class="btn btn-primary btn-sm">Agregar</button>
+                <button id="botonModificar" type="button" class="btn btn-primary btn-sm">Modificar</button>
+                <button id="botonEliminar" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#confirmarEliminar">Eliminar</button>
+                <button id="botonSalir" type="button" class="btn btn-primary btn-sm">Salir</button>
+            </div>
+        </div>
+        <div id="mensajes" class="well well-sm centrado">Mensajes del Sistema.</div>
+        <div class="modal fade" id="confirmarEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header  centrado">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Mensaje del Sistema</h4>
+                    </div>
+                    <div class="modal-body">
+                        Está seguro de eliminar estos datos?
+                    </div>
+                    <div class="modal-footer centrado">
+                        <button id="botonEliminarAlert" type="button" class="btn btn-primary btn-sm">Eliminar</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="confirmarEliminarLinea" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header  centrado">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabelLinea">Mensaje del Sistema</h4>
+                    </div>
+                    <div class="modal-body">
+                        Está seguro de eliminar esta linea?
+                    </div>
+                    <div class="modal-footer centrado">
+                        <button id="botonEliminarAlertLinea" type="button" class="btn btn-primary btn-sm">Eliminar</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="../../../js/jquery.min.js" type="text/javascript"></script>
+        <script src="../../../js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../../js/funciones.js" type="text/javascript"></script> 
+        <script src="js/funcion.js" type="text/javascript"></script>
+        <script>
+                                    verificarSesion(true);
+                                    $("#buscar").css("display", "none");
+                                    $("#panelLinea").css("display", "none");
+                                    $("#id_malla").focus();
+
+                                    //siguienteCampo("#id_alumno", "#nombre_alumno", false);
+
+                                    //siguienteCampo("#apellido_alumno", "#ci_alumno", false);
+
+                                    //if ($("#id_alumno").val() === "0") {
+                                    //siguienteCampo("#id_cliente", "#botonAgregar", false);
+
+                                    //} else {
+
+                                    //siguienteCampo("#id_cliente", "#botonModificar", false);
+                                    //}
+
+                                    $("#id_malla").focusout(function (event) {
+                                        if ($("#id_malla").val() === "") {
+                                            $("#id_malla").val("0");
+                                        }
+                                        buscarIdMalla();
+                                        var id = $("#id_malla").val();
+                                        $("#id_malla").val("0");
+                                        var img = "<img src='../../../img/alumnos/" + id + ".jpg' alt=''>";
+                                        $("#foto").html(img);
+
+                                    });
+                                    $("#id_grado").focusout(function (event) {
+                                           if ($("#id_grado").val() === "") {
+                                               $("#id_grado").val("0");
+                                           }
+                                           buscarIdGrado();
+
+                                       });
+                                       $("#id_especialidad").focusout(function (event) {
+                                           if ($("#id_especialidad").val() === "") {
+                                               $("#id_especialidad").val("0");
+                                           }
+                                           buscarIdEspecialidad();
+
+                                       });
+                                       $("#id_asignatura").focusout(function (event) {
+                                           if ($("#id_asignatura").val() === "") {
+                                               $("#id_asignatura").val("0");
+                                           }
+                                           buscarIdAsignatura();
+
+                                       });
+
+                                    $("#botonBuscarIdMalla").on('click', function () {
+                                        $("#buscar").load("buscarNombre.html");
+                                        $("#buscar").fadeIn("slow");
+                                        $("#panelPrograma").fadeOut("slow");
+                                    });
+                                    $("#botonBuscarIdGrado").on('click', function () {
+
+                                           $("#buscar").load("buscarNombreGrado.html");
+                                           $("#buscar").fadeIn("slow");
+                                           $("#panelPrograma").fadeOut("slow");
+                                       });
+                                       $("#botonBuscarIdEspecialidad").on('click', function () {
+
+                                           $("#buscar").load("buscarNombreEspecialidad.html");
+                                           $("#buscar").fadeIn("slow");
+                                           $("#panelPrograma").fadeOut("slow");
+                                       });
+                                       $("#botonBuscarIdAsignatura").on('click', function () {
+
+                                           $("#buscar").load("buscarNombreAsignatura.html");
+                                           $("#buscar").fadeIn("slow");
+                                           $("#panelLinea").fadeOut("slow");
+                                       });
+
+                                    $("#botonAgregar").on('click', function () {
+
+                                        agregarMalla();
+
+                                    });
+                                    $("#botonModificar").on('click', function () {
+
+                                        modificarMalla();
+
+                                    });
+                                    $("#botonEliminarAlert").on('click', function () {
+                                        eliminarMalla();
+                                        $('#confirmarEliminar').modal('hide');
+                                    });
+                                    $("#botonSalir").on('click', function () {
+                                        location.href = "../../../menu.html";
+                                    });
+
+                                    $("#botonAgregarLinea").on('click', function () {
+
+                                        agregarDetalleMalla();
+
+                                    });
+                                    $("#botonModificarLinea").on('click', function () {
+
+                                        modificarDetalleMalla();
+
+
+                                    });
+                                    $("#botonEliminarAlertLinea").on('click', function () {
+                                        eliminarDetalleMalla();
+                                        $('#confirmarEliminarLinea').modal('hide');
+                                    });
+                                    $("#botonSalirLinea").on('click', function () {
+                                        $("#panelLinea").fadeOut("slow");
+                                        $("#panelPrograma").fadeIn("slow");
+                                    });
+
+        </script>
+    </body>
+</html>

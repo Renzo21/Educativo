@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Nombre del Sistema| Sedes</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../../../css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../../css/estilos.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body style="background-image: url(img/escuela.jpg); max-width: 100%; height: auto; display: block">
+        <script>
+            function sololetras(e) {
+                var e;
+                key = e.keyCode || e.which;
+                tecla = String.fromCharCode(key).toLowerCase();
+                letras = "  áéíóúqwertyuiopasdfghjklñzxcvbnm";
+                especiales = [8, 37, 39, 46];
+
+                tecla_especial = false;
+                for (var i in especiales) {
+                    if (key === especiales[i]) {
+                        tecla_especial = true;
+                        break;
+                    }
+                }
+
+                if (letras.indexOf(tecla) === -1 && !tecla_especial)
+                    return false;
+            }
+        </script>
+
+        <script>
+            function SoloNumPositivos(e) {
+                key = e.keyCode || e.which;
+                tecla = String.fromCharCode(key).toLowerCase();
+                letras = "0123456789";
+                especiales = [8, 37, 39, 46];
+
+                tecla_especial = false;
+                for (var i in especiales) {
+                    if (key === especiales[i]) {
+                        tecla_especial = true;
+                        break;
+                    }
+                }
+
+                if (letras.indexOf(tecla) === -1 && !tecla_especial)
+                    return false;
+            }
+        </script>
+        <div id="confirmar"></div>
+        <div id="buscar"></div>
+        <div id="panelPrograma" class="panel panel-primary">
+            <div class="panel-heading centrado">Sedes | <span
+                    id="susuario_usuario"></span></div>
+            <div class="panel-body">
+                <form id="formPrograma">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Id</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_sede" name="id_sede" type="text"
+                                   class="form-control input-sm" placeholder="Id"
+                                   onkeypress="return SoloNumPositivos(event)">
+                        </div>  
+                        <div class="col-md-1">
+                            <button id="botonBuscarIdSede" type="button" class="btn
+                                    btn-primary btn-sm"><span
+                                    class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Sede</span>
+                        </div>
+                        <div class="col-md-5">
+                            <input id="nombre_sede" name="nombre_sede" type="text"
+                                   class="form-control input-sm"
+                                   placeholder="Nombre de la Sede" onkeyup="this.value =
+                                                   this.value.toUpperCase()"
+                                   onkeypress="return sololetras(event)">
+                        </div>
+                    </div>  
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Direccion</span>
+                        </div>
+                        <div class="col-md-7">
+                            <input id="direccion_sede" name="direccion_sede" type="text"
+                                   class="form-control input-sm"
+                                   placeholder="Direccion de la sede" onkeyup="this.value =
+                                                   this.value.toUpperCase()">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Telefono</span>
+                        </div>
+                        <div class="col-md-5">
+                            <input id="telefono_sede" name="telefono_sede" type="text"
+                                   class="form-control input-sm"
+                                   placeholder="Telefono de la sede" onkeyup="this.value =
+                                                   this.value.toUpperCase()"
+                                   onkeypress="return SoloNumPositivos(event)">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Email</span>
+                        </div>
+                        <div class="col-md-5">
+                            <input id="email_sede" name="email_sede" type="email"
+                                   class="form-control input-sm"
+                                   placeholder="Correo electronico de la sede" 
+                                   onkeypress="return validarCorreo(this)">
+                            <a style="color: red" id='resultado'></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Estado</span>
+                        </div>
+                        <div class="col-md-5">
+                            <select id="estado_sede" name="estado_sede" class="form-control">
+                                <option value="ACTIVO">ACTIVO</option>
+                                <option value="INACTIVO">INACTIVO</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="panel-footer centrado">
+                <button id="botonAgregar" type="button" class="btn btn-primary 
+                        btn-sm">Agregar</button>
+                <button id="botonModificar" type="button" class="btn btn-primary 
+                        btn-sm">Modificar</button>
+                <button id="botonEliminar" type="button" class="btn btn-primary btn-sm"
+                        data-toggle="modal"
+                        data-target="#confirmarEliminar">Eliminar</button>
+                <button id="botonSalir" type="button" class="btn btn-primary
+                        btn-sm">Salir</button>
+            </div>
+        </div>
+        <div id="mensajes" class="well well-sm centrado">Mensajes del sistema.</div>
+        <div class="modal fade" id="confirmarEliminar" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header centrado">
+                        <button type="button" class="close" data-dismiss="modal"><span 
+                                aria-hidden="true">
+                                &times;</span> <span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Mensaje del sistema</h4>
+                    </div>
+                    <div class="modal-body">
+                        Está seguro de eliminar estos datos?
+                    </div>
+                    <div class="modal-footer centrado">
+                        <button id="botonEliminarAlert" type="button" class="btn btn-primary btn-sm">Eliminar</button>
+                        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="../../../js/funciones.js" type="text/javascript"></script>
+        <script src="../../../js/jquery.js" type="text/javascript"></script>
+        <script src="../../../js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="js/funcion.js" type="text/javascript"></script>
+        <script>
+                                    verificarSesion(true);
+                                    $("#buscar").css("display", "none");
+                                    $("#id_sede").focus();
+                                    //    siguienteCampo("#id_nsede", "#nombre_nsede", false);
+                                    $("#id_sede").focusout(function (event) {
+                                        if ($("#id_sede").val() === "") {
+                                            $("#id_sede").val("0");
+                                        }
+                                        buscarIdSede();
+
+                                    });
+
+                                    $("#botonAgregar").on('click', function () {
+
+                                        if (validarFormulario()) {
+                                            agregar();
+                                        }
+                                    });
+
+                                    $("#botonBuscarIdSede").on('click', function () {
+
+                                        $("#buscar").load("buscarNombre.html");
+                                        $("#buscar").fadeIn("slow");
+                                        $("#panelPrograma").fadeOut("slow");
+                                    });
+                                    $("#botonModificar").on('click', function () {
+                                        if (validarFormulario()) {
+                                            modificar();
+                                        }
+                                    });
+                                    $("#botonEliminarAlert").on('click', function () {
+                                        eliminar();
+                                        $('#confirmarEliminar').modal('hide');
+                                    });
+                                    $("#botonSalir").on('click', function () {
+                                        location.href = "../../../frm/procesos/convocatorias/index.html"; //aqui tiene q haber un menu
+                                    });
+
+        </script>
+    </body>
+</html>

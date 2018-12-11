@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SistemaEducativo | Calificaciones</title>
+        <link rel="icon" type="image/png" href="../../../favicon.png" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../../../css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../../css/estilos.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <script>
+            function sololetras(e) {
+                var e;
+                key = e.keyCode || e.which;
+                tecla = String.fromCharCode(key).toLowerCase();
+                letras = "  áéíóúqwertyuiopasdfghjklñzxcvbnm";
+                especiales = [8, 37, 39, 46];
+
+                tecla_especial = false;
+                for (var i in especiales) {
+                    if (key === especiales[i]) {
+                        tecla_especial = true;
+                        break;
+                    }
+                }
+
+                if (letras.indexOf(tecla) === -1 && !tecla_especial)
+                    return false;
+            }
+        </script>
+
+        <script>
+            function SoloNumPositivos(e) {
+                key = e.keyCode || e.which;
+                tecla = String.fromCharCode(key).toLowerCase();
+                letras = "0123456789";
+                especiales = [8, 37, 39, 46];
+
+                tecla_especial = false;
+                for (var i in especiales) {
+                    if (key === especiales[i]) {
+                        tecla_especial = true;
+                        break;
+                    }
+                }
+
+                if (letras.indexOf(tecla) === -1 && !tecla_especial)
+                    return false;
+            }
+        </script>
+        <div id="confirmar"></div>
+        <div id="buscar"></div>
+        <div id="panelPrograma" class="panel panel-primary">
+            <div class="panel-heading centrado">Calificaciones | <span id="snombre_empresa"></span> | <span id="susuario_usuario"></span></div>
+            <div class="panel-body">
+                <form id="formPrograma">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Id</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_calificaciones" name="id_calificaciones" type="text" class="form-control input-sm" placeholder="Id" onkeypress="return SoloNumPositivos(event)">
+                        </div>
+                        <div class="col-md-1">
+                            <button id="botonBuscarIdCalificacion" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="fecha_calificacion" name="fecha_calificacion" type="Date" class="form-control input-sm">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Curso</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_detalleconvocatoria" name="id_detalleconvocatoria" type="text" class="form-control input-sm" placeholder="Id" onkeypress="return SoloNumPositivos(event)">
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_convocatoria" name="id_convocatoria" type="text" class="form-control input-sm" placeholder="Id" readonly="readonly">
+                        </div>
+                        <div class="col-md-1">
+                            <button id="botonBuscarIdConvocatoria" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                        <div class="col-md-2">
+                            <input id="nombre_grado" name="nombre_grado" type="text" class="form-control input-sm" placeholder="Grado" disabled="disabled">
+                        </div>
+                        <div class="col-md-2">
+                            <input id="nombre_seccion" name="nombre_seccion" type="text" class="form-control input-sm" placeholder="Seccion" disabled="disabled">
+                        </div>
+                        <div class="col-md-2">
+                            <input id="nombre_turno" name="nombre_turno" type="text" class="form-control input-sm" placeholder="Turno" disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Etapa_Id</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_etapa" name="id_etapa" type="text"
+                                   class="form-control input-sm" placeholder="Id"
+                                   onkeypress="return SoloNumPositivos(event)">
+                        </div>  
+                        <div class="col-md-1">
+                            <button id="botonBuscarIdEtapa" type="button" class="btn
+                                    btn-primary btn-sm"><span
+                                    class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Etapa</span>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="nombre_etapa" name="nombre_etapa" type="text"
+                                   class="form-control input-sm"
+                                   placeholder="Nombre de la Etapa" onkeyup="this.value =
+                                                   this.value.toUpperCase()"
+                                   onkeypress="return sololetras(event)" readonly="readonly">
+                        </div>
+                        <div class="col-md-1">
+                            <button id="botonAgregarEtapa" type="button" class="btn
+                                    btn-primary btn-sm">Agregar Etapa</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Asignatura_Id</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_asignatura" name="id_asignatura" type="text"
+                                   class="form-control input-sm" placeholder="Id"
+                                   onkeypress="return SoloNumPositivos(event)">
+                        </div>  
+                        <div class="col-md-1">
+                            <button id="botonBuscarIdAsignatura" type="button" class="btn
+                                    btn-primary btn-sm"><span
+                                    class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Asignatura</span>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="nombre_asignatura" name="nombre_asignatura" type="text"
+                                   class="form-control input-sm"
+                                   placeholder="Nombre de la Asignatura" onkeyup="this.value =
+                                                   this.value.toUpperCase()"
+                                   onkeypress="return sololetras(event)" readonly="readonly">
+                        </div>
+                        <div class="col-md-1">
+                            <button id="botonAgregarAsignatura" type="button" class="btn
+                                    btn-primary btn-sm">Agregar Asignatura</button>
+                        </div>
+                    </div>
+                </form>
+                <div id="detalle" hidden="">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Id Alumno</th>
+                                <th>Alumno</th>
+                                <th>Apellido</th>
+                                <th class="centrado">Nota Final</th>
+                            </tr>
+                        </thead>
+                        <tbody id="contenidoDetalle">
+                        </tbody>
+                    </table>
+                </div>
+                <button onclick="modificarDetalleCalificacion()"
+                        type="button" class="btn btn-primary btn-sm"><span>Guardar Notas
+                    </span> </button>
+            </div>
+            <div class="panel-footer centrado">
+                <button id="botonAgregar" type="button" class="btn btn-primary btn-sm">Agregar</button>
+                <button id="botonModificar" type="button" class="btn btn-primary btn-sm">Modificar</button>
+                <button id="botonReporte" type="button" class="btn btn-primary btn-sm">Reporte</button>
+                <button id="botonEliminar" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#confirmarEliminar">Eliminar</button>
+                <button id="botonSalir" type="button" class="btn btn-primary btn-sm">Salir</button>
+            </div>
+        </div>
+        <div id="mensajes" class="well well-sm centrado">Mensajes del Sistema.</div>
+        <div class="modal fade" id="confirmarEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header  centrado">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Mensaje del Sistema</h4>
+                    </div>
+                    <div class="modal-body">
+                        Está seguro de eliminar estos datos?
+                    </div>
+                    <div class="modal-footer centrado">
+                        <button id="botonEliminarAlert" type="button" class="btn btn-primary btn-sm">Eliminar</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="confirmarEliminarLinea" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header  centrado">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabelLinea">Mensaje del Sistema</h4>
+                    </div>
+                    <div class="modal-body">
+                        Está seguro de eliminar esta linea?
+                    </div>
+                    <div class="modal-footer centrado">
+                        <button id="botonEliminarAlertLinea" type="button" class="btn btn-primary btn-sm">Eliminar</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="../../../js/jquery.min.js" type="text/javascript"></script>
+        <script src="../../../js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../../js/funciones.js" type="text/javascript"></script> 
+        <script src="js/funcion.js" type="text/javascript"></script>
+        <script>
+                    verificarSesion(true);
+                    $("#buscar").css("display", "none");
+                    $("#panelLinea").css("display", "none");
+                    $("#id_calificaciones").focus();
+
+                    //siguienteCampo("#id_alumno", "#nombre_alumno", false);
+
+                    //siguienteCampo("#apellido_alumno", "#ci_alumno", false);
+
+                    //if ($("#id_alumno").val() === "0") {
+                    //siguienteCampo("#id_cliente", "#botonAgregar", false);
+
+                    //} else {
+
+                    //siguienteCampo("#id_cliente", "#botonModificar", false);
+                    //}
+
+                    $("#id_calificaciones").focusout(function (event) {
+                        if ($("#id_calificaciones").val() === "") {
+                            $("#id_calificaciones").val("0");
+                        }
+                        buscarIdCalificacion();
+                        var id = $("#id_calificaciones").val();
+                        $("#id_calificaciones").val("0");
+                        var img = "<img src='../../../img/alumnos/" + id + ".jpg' alt=''>";
+                        $("#foto").html(img);
+
+                    });
+                    $("#id_inscripcion").focusout(function (event) {
+                        if ($("#id_inscripcion").val() === "") {
+                            $("#id_inscripcion").val("0");
+                        }
+                        buscarIdInscripcion();
+
+                    });
+                    $("#id_convocatoria").focusout(function (event) {
+                        if ($("#id_convocatoria").val() === "") {
+                            $("#id_convocatoria").val("0");
+                        }
+                        buscarIdConvocatoria();
+                        var id = $("#id_convocatoria").val();
+                        $("#id_convocatoria").val("0");
+                        var img = "<img src='../../../img/convocatorias/" + id + ".jpg' alt=''>";
+                        $("#foto").html(img);
+
+                    });
+                    $("#id_etapa").focusout(function (event) {
+                        if ($("#id_etapa").val() === "") {
+                            $("#id_etapa").val("0");
+                        }
+                        buscarIdEtapa();
+
+                    });
+
+                    $("#botonBuscarIdCalificacion").on('click', function () {
+                        $("#buscar").load("buscarNombre.html");
+                        $("#buscar").fadeIn("slow");
+                        $("#panelPrograma").fadeOut("slow");
+                    });
+                    $("#botonBuscarIdAsignatura").on('click', function () {
+                        $("#buscar").load("buscarNombreAsignatura.html");
+                        $("#buscar").fadeIn("slow");
+                        $("#panelPrograma").fadeOut("slow");
+                    });
+                    $("#botonBuscarIdInscripcion").on('click', function () {
+
+                        $("#buscar").load("buscarNombreInscripcion.html");
+                        $("#buscar").fadeIn("slow");
+                        $("#panelLinea").fadeOut("slow");
+                    });
+                    $("#botonBuscarIdConvocatoria").on('click', function () {
+                        $("#buscar").load("buscarNombreConvocatoria.html");
+                        $("#buscar").fadeIn("slow");
+                        $("#panelPrograma").fadeOut("slow");
+                    });
+                    $("#botonBuscarIdEtapa").on('click', function () {
+
+                        $("#buscar").load("buscarNombreEtapa.html");
+                        $("#buscar").fadeIn("slow");
+                        $("#panelPrograma").fadeOut("slow");
+                    });
+
+                    $("#botonAgregar").on('click', function () {
+
+                        agregarCalificacion();
+
+                    });
+                    
+                    $("#botonReporte").on('click', function () {
+                        location.href = "../../../frm/reportes/calificaciones/index.html";
+                    });
+                    
+                    $("#botonModificar").on('click', function () {
+
+                        modificarCalificacion();
+
+                    });
+                    $("#botonEliminarAlert").on('click', function () {
+                        eliminarCalificacion();
+                        $('#confirmarEliminar').modal('hide');
+                    });
+                    
+                    $("#botonAgregarEtapa").on('click', function () {
+                        location.href = "../../../frm/archivos/etapas/index.html";
+                    });
+                    
+                    $("#botonAgregarAsignatura").on('click', function () {
+                        location.href = "../../../frm/archivos/asignaturas/index.html";
+                    });
+                    
+                    $("#botonSalir").on('click', function () {
+                        location.href = "../../../menu.html";
+                    });
+
+                    $("#botonAgregarLinea").on('click', function () {
+
+                        agregarDetalleCalificacion();
+
+                    });
+
+                    //$("#botonModificarLinea").on('click', function () {
+
+                    // modificarDetalleAsistencia();
+
+
+                    //});
+                    $("#botonEliminarAlertLinea").on('click', function () {
+                        eliminarDetalleCalificacion();
+                        $('#confirmarEliminarLinea').modal('hide');
+                    });
+                    $("#botonSalirLinea").on('click', function () {
+                        $("#panelLinea").fadeOut("slow");
+                        $("#panelPrograma").fadeIn("slow");
+                    });
+
+        </script>
+    </body>
+</html>

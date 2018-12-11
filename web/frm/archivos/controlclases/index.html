@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Nombre del Sistema| Control de Clases</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../../../css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../../css/estilos.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body style="background-image: url(img/escuela.jpg); max-width: 100%; height: auto; display: block">
+        <script>
+            function sololetras(e) {
+            var e;
+                key = e.keyCode || e.which;
+                tecla = String.fromCharCode(key).toLowerCase();
+                letras = "  áéíóúqwertyuiopasdfghjklñzxcvbnm";
+                especiales = [8, 37, 39, 46];
+
+                tecla_especial = false;
+                for (var i in especiales) {
+                    if (key === especiales[i]) {
+                        tecla_especial = true;
+                        break;
+                    }
+                }
+
+                if (letras.indexOf(tecla) === -1 && !tecla_especial)
+                    return false;
+            }
+        </script>
+
+        <script>
+            function SoloNumPositivos(e) {
+                key = e.keyCode || e.which;
+                tecla = String.fromCharCode(key).toLowerCase();
+                letras = "0123456789";
+                especiales = [8, 37, 39, 46];
+
+                tecla_especial = false;
+                for (var i in especiales) {
+                    if (key === especiales[i]) {
+                        tecla_especial = true;
+                        break;
+                    }
+                }
+
+                if (letras.indexOf(tecla) === -1 && !tecla_especial)
+                    return false;
+          }
+       </script>
+        <div id="confirmar"></div>
+        <div id="buscar"></div>
+        <div id="panelPrograma" class="panel panel-primary">
+            <div class="panel-heading centrado">Control de Clases | <span
+                    id="susuario_usuario"></span></div>
+            <div class="panel-body">
+                <form id="formPrograma">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Id</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_controlclase" name="id_controlclase" type="text"
+                                   class="form-control input-sm" placeholder="Id"
+                                   onkeypress="return SoloNumPositivos(event)">
+                        </div>  
+                        <div class="col-md-1">
+                            <button id="botonBuscarIdControlClase" type="button" class="btn
+                                    btn-primary btn-sm"><span
+                                    class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Grado_Id</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_grado" name="id_grado" type="text"
+                                   class="form-control input-sm" placeholder="Id"
+                                   onkeypress="return SoloNumPositivos(event)">
+                        </div>  
+                        <div class="col-md-1">
+                            <button id="botonBuscarIdGrado" type="button" class="btn
+                                    btn-primary btn-sm"><span
+                                    class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Grado</span>
+                        </div>
+                        <div class="col-md-2">
+                            <input id="nombre_grado" name="nombre_grado" type="text"
+                                   class="form-control input-sm"
+                                   placeholder="Nombre del Grado en numero" onkeyup="this.value =
+                                                   this.value.toUpperCase()"
+                                                   onkeypress="return SoloNumPositivos(event)" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Especialidad_Id</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_especialidad" name="id_especialidad" type="text"
+                                   class="form-control input-sm" placeholder="Id"
+                                   onkeypress="return SoloNumPositivos(event)">
+                        </div>  
+                        <div class="col-md-1">
+                            <button id="botonBuscarIdEspecialidad" type="button" class="btn
+                                    btn-primary btn-sm"><span
+                                    class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Especialidad</span>
+                        </div>
+                        <div class="col-md-2">
+                            <input id="nombre_especialidad" name="nombre_especialidad" type="text"
+                                   class="form-control input-sm"
+                                   placeholder="Nombre de la Especialidad" onkeyup="this.value =
+                                                   this.value.toUpperCase()"
+                                onkeypress="return sololetras(event)" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Contenido</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_contenido" name="id_contenido" type="text"
+                                   class="form-control input-sm" placeholder="Id"
+                                   onkeypress="return SoloNumPositivos(event)">
+                        </div>  
+                        <div class="col-md-1">
+                            <button id="botonBuscarIdContenido" type="button" class="btn
+                                    btn-primary btn-sm"><span
+                                    class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                        <div class="col-md-1">
+                            <button id="botonAgregarContenido" type="button" class="btn
+                                    btn-primary btn-sm">Agregar Contenido</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Asignatura</span>
+                        </div>
+                        <div class="col-md-2">
+                            <input id="nombre_asignatura" name="nombre_asignatura" type="text"
+                                   class="form-control input-sm"
+                                   placeholder="Nombre de la Asignatura" onkeyup="this.value =
+                                                   this.value.toUpperCase()"
+                                onkeypress="return sololetras(event)" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Unidad</span>
+                        </div>
+                        <div class="col-md-4">
+                            <input id="descripcion_unidad" name="descripcion_unidad" type="text"
+                                   class="form-control input-sm"
+                                   placeholder="Descripcion o Nombre de la Unidad" onkeyup="this.value =
+                                               this.value.toUpperCase()" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Contenido</span>
+                        </div>
+                        <div class="col-md-5">
+                            <input id="descripcion_contenido" name="descripcion_contenido" type="text"
+                                   class="form-control input-sm"
+                                   placeholder="Dsecripcion del contenido de la unidad" onkeyup="this.value =
+                                                   this.value.toUpperCase()"
+                                onkeypress="return sololetras(event)" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Profesor</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_profesor" name="id_profesor" type="text"
+                                   class="form-control input-sm" placeholder="Id"
+                                   onkeypress="return SoloNumPositivos(event)">
+                        </div>  
+                        <div class="col-md-1">
+                            <button id="botonBuscarIdProfesor" type="button" class="btn
+                                    btn-primary btn-sm"><span
+                                    class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Nombre</span>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="nombre_profesor" name="nombre_profesor" type="text"
+                                   class="form-control input-sm"
+                                   placeholder="Nombre del Profesor" onkeyup="this.value =
+                                                   this.value.toUpperCase()"
+                                onkeypress="return sololetras(event)" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Apellido</span>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="apellido_profesor" name="apellido_profesor" type="text"
+                                   class="form-control input-sm"
+                                   placeholder="Apellido del Profesor" onkeyup="this.value =
+                                                   this.value.toUpperCase()"
+                                onkeypress="return sololetras(event)" readonly="readonly">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Fecha</span>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="fecha_clase" name="fecha_clase" type="Date"
+                                   class="form-control input-sm">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Progreso</span>
+                        </div>
+                        <div class="col-md-2">
+                            <input id="progreso_clase" name="progreso_clase" type="text"
+                                   class="form-control input-sm" placeholder="Progreso de la clase en %">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="panel-footer centrado">
+                <button id="botonAgregar" type="button" class="btn btn-primary 
+                        btn-sm">Agregar</button>
+                <button id="botonModificar" type="button" class="btn btn-primary 
+                        btn-sm">Modificar</button>
+                <button id="botonEliminar" type="button" class="btn btn-primary btn-sm"
+                        data-toggle="modal"
+                        data-target="#confirmarEliminar">Eliminar</button>
+                <button id="botonSalir" type="button" class="btn btn-primary
+                        btn-sm">Salir</button>
+            </div>
+        </div>
+        <div id="mensajes" class="well well-sm centrado">Mensajes del sistema.</div>
+        <div class="modal fade" id="confirmarEliminar" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header centrado">
+                        <button type="button" class="close" data-dismiss="modal"><span 
+                                aria-hidden="true">
+                                &times;</span> <span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Mensaje del sistema</h4>
+                    </div>
+                    <div class="modal-body">
+                        Está seguro de eliminar estos datos?
+                    </div>
+                    <div class="modal-footer centrado">
+                        <button id="botonEliminarAlert" type="button" class="btn btn-primary btn-sm">Eliminar</button>
+                        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="../../../js/jquery.js" type="text/javascript"></script>
+        <script src="../../../js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="js/funcion.js" type="text/javascript"></script>
+        <script src="../../../js/funciones.js" type="text/javascript"></script>
+        <script>
+                                       verificarSesion(true);
+                                       $("#buscar").css("display", "none");
+                                       $("#id_controlclase").focus();
+                                       //    siguienteCampo("#id_ncontrolclase", "#nombre_ncontrolclase", false);
+                                       $("#id_controlclase").focusout(function (event) {
+                                           if ($("#id_controlclase").val() === "") {
+                                               $("#id_controlclase").val("0");
+                                           }
+                                           buscarIdControlClase();
+
+                                       });
+                                       $("#id_grado").focusout(function (event) {
+                                           if ($("#id_grado").val() === "") {
+                                               $("#id_grado").val("0");
+                                           }
+                                           buscarIdGrado();
+
+                                       });
+                                       $("#id_especialidad").focusout(function (event) {
+                                           if ($("#id_especialidad").val() === "") {
+                                               $("#id_especialidad").val("0");
+                                           }
+                                           buscarIdEspecialidad();
+
+                                       });
+                                       $("#id_contenido").focusout(function (event) {
+                                           if ($("#id_contenido").val() === "") {
+                                               $("#id_contenido").val("0");
+                                           }
+                                           buscarIdContenido();
+
+                                       });
+                                       $("#nombre_controlclase").blur(function (){
+                                           buscarNombreRepetidoControlClase();
+                                       });
+                                       $("#id_profesor").focusout(function (event) {
+                                           if ($("#id_profesor").val() === "") {
+                                               $("#id_profesor").val("0");
+                                           }
+                                           buscarIdProfesor();
+
+                                       });
+
+                                       $("#botonAgregar").on('click', function () {
+
+                                                if (validarFormulario()) {
+                                           agregar();
+                                                 }
+                                       });
+
+                                       $("#botonBuscarIdControlClase").on('click', function () {
+
+                                           $("#buscar").load("buscarNombre.html");
+                                           $("#buscar").fadeIn("slow");
+                                           $("#panelPrograma").fadeOut("slow");
+                                       });
+                                       $("#botonBuscarIdGrado").on('click', function () {
+
+                                           $("#buscar").load("buscarNombreGrado.html");
+                                           $("#buscar").fadeIn("slow");
+                                           $("#panelPrograma").fadeOut("slow");
+                                       });
+                                       $("#botonBuscarIdEspecialidad").on('click', function () {
+
+                                           $("#buscar").load("buscarNombreEspecialidad.html");
+                                           $("#buscar").fadeIn("slow");
+                                           $("#panelPrograma").fadeOut("slow");
+                                       });
+                                       $("#botonBuscarIdContenido").on('click', function () {
+
+                                           $("#buscar").load("buscarNombreContenido.html");
+                                           $("#buscar").fadeIn("slow");
+                                           $("#panelPrograma").fadeOut("slow");
+                                       });
+                                        $("#botonBuscarIdProfesor").on('click', function () {
+
+                                           $("#buscar").load("buscarNombreProfesor.html");
+                                           $("#buscar").fadeIn("slow");
+                                           $("#panelPrograma").fadeOut("slow");
+                                       });
+                                       $("#botonModificar").on('click', function(){
+                                        if (validarFormulario()){
+                                        modificar();
+                                        }
+                                        });
+                                        $("#botonEliminarAlert").on('click', function(){
+                                        eliminar();
+                                        $('#confirmarEliminar').modal('hide');
+                                        });
+                                       
+                                       $("#botonAgregarContenido").on('click', function () {
+                                            location.href="../../../frm/archivos/contenidos/index.html";
+                                       });
+                                        
+                                        $("#botonSalir").on('click', function(){
+                                        location.href = "../../../menu.html"; //aqui tiene q haber un menu
+                                        });
+
+        </script>
+    </body>
+</html>

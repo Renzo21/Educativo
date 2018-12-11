@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Nombre del Sistema| Inscripciones</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../../../css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../../css/estilos.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <script>
+            function sololetras(e) {
+                var e;
+                key = e.keyCode || e.which;
+                tecla = String.fromCharCode(key).toLowerCase();
+                letras = "  áéíóúqwertyuiopasdfghjklñzxcvbnm";
+                especiales = [8, 37, 39, 46];
+
+                tecla_especial = false;
+                for (var i in especiales) {
+                    if (key === especiales[i]) {
+                        tecla_especial = true;
+                        break;
+                    }
+                }
+
+                if (letras.indexOf(tecla) === -1 && !tecla_especial)
+                    return false;
+            }
+        </script>
+
+        <script>
+            function SoloNumPositivos(e) {
+                key = e.keyCode || e.which;
+                tecla = String.fromCharCode(key).toLowerCase();
+                letras = "0123456789";
+                especiales = [8, 37, 39, 46];
+
+                tecla_especial = false;
+                for (var i in especiales) {
+                    if (key === especiales[i]) {
+                        tecla_especial = true;
+                        break;
+                    }
+                }
+
+                if (letras.indexOf(tecla) === -1 && !tecla_especial)
+                    return false;
+            }
+        </script>
+        <div id="confirmar"></div>
+        <div id="buscar"></div>
+        <div id="panelPrograma" class="panel panel-primary">
+            <div class="panel-heading centrado">Inscripciones | <span
+                    id="susuario_usuario"></span></div>
+            <div class="panel-body">
+                <form id="formPrograma" >
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Id</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_inscripcion" name="id_inscripcion" type="text"
+                                   class="form-control input-sm" placeholder="Id"
+                                   onkeypress="return SoloNumPositivos(event)">
+                        </div>  
+                        <div class="col-md-1">
+                            <button id="botonBuscarIdInscripcion" type="button" class="btn
+                                    btn-primary btn-sm"><span
+                                    class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Aumno</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_alumno" name="id_alumno" type="text"
+                                   class="form-control input-sm" placeholder="Id"
+                                   onkeypress="return SoloNumPositivos(event)">
+                        </div>  
+                        <div class="col-md-1">
+                            <button id="botonBuscarIdAlumno" type="button" class="btn
+                                    btn-primary btn-sm"><span
+                                    class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                        <div class="col-md-1">
+                            <button id="botonAgregarAlumno" type="button" class="btn
+                                    btn-primary btn-sm">Agregar Alumno</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Nombre</span>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="nombre_alumno" name="nombre_alumno" type="text"
+                                   class="form-control input-sm"
+                                   placeholder="Nombre del alumno" onkeyup="this.value =
+                                                   this.value.toUpperCase()"
+                                   onkeypress="return sololetras(event)" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Apellido</span>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="apellido_alumno" name="apellido_alumno" type="text"
+                                   class="form-control input-sm"
+                                   placeholder="Apellido del alumno" onkeyup="this.value =
+                                                   this.value.toUpperCase()"
+                                   onkeypress="return sololetras(event)" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Cedula</span>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="ci_alumno" name="ci_alumno" type="text"
+                                   class="form-control input-sm"
+                                   placeholder="N° de Cedula del alumno" onkeyup="this.value =
+                                                   this.value.toUpperCase()" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Convocatoria</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_convocatoria" name="id_convocatoria" type="text" class="form-control input-sm" placeholder="Id" onkeypress="return SoloNumPositivos(event)">
+                        </div>
+                        <div class="col-md-1">
+                            <button id="botonBuscarIdConvocatoria" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Sede</span>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="nombre_sede" name="nombre_sede" type="text" class="form-control input-sm" placeholder="Nombre de la Sede" readonly="readonly">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Grado</span>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="nombre_grado" name="nombre_grado" type="text" class="form-control input-sm" placeholder="Nombre del Grado en numero" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Especialidad</span>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="nombre_especialidad" name="nombre_especialidad" type="text" class="form-control input-sm" placeholder="Nombre de la Especialidad" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Seccion</span>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="nombre_seccion" name="nombre_seccion" type="text" class="form-control input-sm" placeholder="Nombre de la Seccion en numero" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Turno</span>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="nombre_turno" name="nombre_turno" type="text" class="form-control input-sm" placeholder="Nombre del Turno" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Fecha</span>
+                        </div>
+                        <div class="col-md-3">
+                            <input id="fecha_inscripcion" name="fecha_inscripcion" type="Date" class="form-control input-sm">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Estado</span>
+                        </div>
+                        <div class="col-md-2">
+                        <select id="estado_inscripcion" name="estado_inscripcion" class="form-control">
+                            <option value="COMPLETADO">COMPLETADO</option>
+                            <option value="PENDIENTE">PENDIENTE</option>
+                            <option value="ANULADO">ANULADO</option>
+                        </select>
+                    </div>
+                    </div>
+                    <div class="col-md-2" hidden="hidden">
+                        <select id="listado" class="form-control">
+                            <option value="constancia">Constancia</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="panel-footer centrado">
+                <button id="botonAgregar" type="button" class="btn btn-primary 
+                        btn-sm">Agregar</button>
+                <button id="botonModificar" type="button" class="btn btn-primary 
+                        btn-sm">Modificar</button>
+                <button id="botonConstancia" type="button" class="btn btn-primary 
+                        btn-sm">Constancia</button>
+                <button id="botonReporte" type="button" class="btn btn-primary 
+                        btn-sm">Reporte</button>
+                <button id="botonEliminar" type="button" class="btn btn-primary btn-sm"
+                        data-toggle="modal"
+                        data-target="#confirmarEliminar">Eliminar</button>
+                <button id="botonSalir" type="button" class="btn btn-primary
+                        btn-sm">Salir</button>
+            </div>
+        </div>
+        <div id="mensajes" class="well well-sm centrado">Mensajes del sistema.</div>
+        <div class="modal fade" id="confirmarEliminar" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header centrado">
+                        <button type="button" class="close" data-dismiss="modal"><span 
+                                aria-hidden="true">
+                                &times;</span> <span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Mensaje del sistema</h4>
+                    </div>
+                    <div class="modal-body">
+                        Está seguro de eliminar estos datos?
+                    </div>
+                    <div class="modal-footer centrado">
+                        <button id="botonEliminarAlert" type="button" class="btn btn-primary btn-sm">Eliminar</button>
+                        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="../../../js/jquery.js" type="text/javascript"></script>
+        <script src="../../../js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="js/funcion.js" type="text/javascript"></script>
+        <script src="../../../js/funciones.js" type="text/javascript"></script>
+        <script>
+                                //Es una validacion que no permite a los usuarios a realizar ninguna 
+                                //accion antes de verificar si es valido o no
+                                verificarSesion(true);
+                                $("#buscar").css("display", "none");
+                                $("#id_inscripcion").focus();
+                                //    siguienteCampo("#id_ninscripcion", "#nombre_ninscripcion", false);
+                                $("#id_inscripcion").focusout(function (event) {
+                                    if ($("#id_inscripcion").val() === "") {
+                                        $("#id_inscripcion").val("0");
+                                    }
+                                    buscarIdInscripcion();
+                                    //la funcion permite recuperar los datos
+                                    //almacenados en la base de datos a traves de un id 
+                                    //unico para cada dato guardado
+                                });
+
+                                $("#id_alumno").focusout(function (event) {
+                                    if ($("#id_alumno").val() === "") {
+                                        $("#id_alumno").val("0");
+                                    }
+                                    buscarIdAlumno();
+
+                                });
+                                $("#id_convocatoria").focusout(function (event) {
+                                    if ($("#id_convocatoria").val() === "") {
+                                        $("#id_convocatoria").val("0");
+                                    }
+                                    buscarIdConvocatoria();
+                                    var id = $("#id_convocatoria").val();
+                                    $("#id_convocatoria").val("0");
+                                    var img = "<img src='../../../img/convocatorias/" + id + ".jpg' alt=''>";
+                                    $("#foto").html(img);
+
+                                });
+
+                                $("#botonAgregar").on('click', function () {
+
+                                    if (validarFormulario()) {
+                                            agregar();
+                                        
+                                    }
+                                });
+
+                                $("#botonBuscarIdInscripcion").on('click', function () {
+
+                                    $("#buscar").load("buscarNombre.html");
+                                    $("#buscar").fadeIn("slow");
+                                    $("#panelPrograma").fadeOut("slow");
+                                });
+                                $("#botonBuscarIdAlumno").on('click', function () {
+
+                                    $("#buscar").load("buscarNombreAlumno.html");
+                                    $("#buscar").fadeIn("slow");
+                                    $("#panelPrograma").fadeOut("slow");
+                                });
+                                $("#botonBuscarIdConvocatoria").on('click', function () {
+                                    $("#buscar").load("buscarNombreConvocatoria.html");
+                                    $("#buscar").fadeIn("slow");
+                                    $("#panelPrograma").fadeOut("slow");
+                                });
+                                $("#botonModificar").on('click', function () {
+                                    if (validarFormulario()) {
+                                        modificar();
+                                    }
+                                });
+
+                                $("#botonAgregarAlumno").on('click', function () {
+                                    location.href = "../../../frm/procesos/alumnos/index.html";
+                                });
+
+                                $("#botonEliminarAlert").on('click', function () {
+                                    eliminar();
+                                    $('#confirmarEliminar').modal('hide');
+                                });
+
+                               $("#botonConstancia").on('click', function () {
+                                           var l = $("#listado").val();
+                                           var id = $("#id_inscripcion").val();
+                                           var jsp = "jsp/constancia.jsp";
+                                           window.open(jsp + "?l=" + l + "&id=" + id);
+                                       });
+
+                                $("#botonReporte").on('click', function () {
+                                    location.href = "../../../frm/reportes/inscripciones/index.html";
+                                });
+                                
+                                $("#botonCargar").on('click', function () {
+                                    var doc1 = $("#doc1").checked;
+                                    var doc2 = $("#doc2").checked;
+                                    var doc3 = $("#doc3").checked;
+                                    var doc4 = $("#doc3").checked;
+                                    
+                                    if(doc1===true && doc2===true && doc3===true && doc4===true){
+                                        $("#estado_inscripcion").val("COMPLETADO");
+                                    }
+                                });
+
+                                $("#botonSalir").on('click', function () {
+                                    location.href = "../../../menu.html"; //aqui tiene q haber un menu
+                                });
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SistemaEducativo | Justificativos</title>
+        <link rel="icon" type="image/png" href="../../../favicon.png" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../../../css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../../css/estilos.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <script>
+            function sololetras(e) {
+                var e;
+                key = e.keyCode || e.which;
+                tecla = String.fromCharCode(key).toLowerCase();
+                letras = "  áéíóúqwertyuiopasdfghjklñzxcvbnm";
+                especiales = [8, 37, 39, 46];
+
+                tecla_especial = false;
+                for (var i in especiales) {
+                    if (key === especiales[i]) {
+                        tecla_especial = true;
+                        break;
+                    }
+                }
+
+                if (letras.indexOf(tecla) === -1 && !tecla_especial)
+                    return false;
+            }
+        </script>
+
+        <script>
+            function SoloNumPositivos(e) {
+                key = e.keyCode || e.which;
+                tecla = String.fromCharCode(key).toLowerCase();
+                letras = "0123456789";
+                especiales = [8, 37, 39, 46];
+
+                tecla_especial = false;
+                for (var i in especiales) {
+                    if (key === especiales[i]) {
+                        tecla_especial = true;
+                        break;
+                    }
+                }
+
+                if (letras.indexOf(tecla) === -1 && !tecla_especial)
+                    return false;
+            }
+        </script>
+        <div id="confirmar"></div>
+        <div id="buscar"></div>
+        <div id="panelLinea" class="panel panel-primary">
+            <div class="panel-heading centrado">Justificativos | Detalle</div>
+            <div class="panel-body">
+                <form id="formLinea">
+
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Id Linea</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_detallejustificativos" name="id_detallejustificativos" type="text" class="form-control input-sm" placeholder="Id" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Inscripto</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_inscripcion" name="id_inscripcion" type="text" class="form-control input-sm" placeholder="Id" onkeypress="return SoloNumPositivos(event)">
+                        </div>
+                        <div class="col-md-1">
+                            <button id="botonBuscarIdInscripcion" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                        <div class="col-md-2">
+                            <input id="nombre_alumno" name="nombre_alumno" type="text" class="form-control input-sm" placeholder="Nombre del alumno" readonly="readonly">
+                        </div>
+                        <div class="col-md-2">
+                            <input id="apellido_alumno" name="apellido_alumno" type="text" class="form-control input-sm" placeholder="Apellido del alumno" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Grado</span>
+                        </div>
+                        <div class="col-md-2">
+                            <input id="nombre_grado" name="nombre_grado" type="text" class="form-control input-sm" placeholder="Nombre del Grado en numero" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Seccion</span>
+                        </div>
+                        <div class="col-md-2">
+                            <input id="nombre_seccion" name="nombre_seccion" type="text" class="form-control input-sm" placeholder="Nombre de Seccion en numero" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Turno</span>
+                        </div>
+                        <div class="col-md-2">
+                            <input id="nombre_turno" name="nombre_turno" type="text" class="form-control input-sm" placeholder="Nombre del Turno" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Fecha</span>
+                        </div>
+                        <div class="col-md-2">
+                            <input id="fecha_justificativo" name="fecha_justificativo" type="Date" class="form-control input-sm"
+                                   onkeyup="this.value =
+                                                   this.value.toUpperCase()">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="panel-footer centrado">
+                <button id="botonAgregarLinea" type="button" class="btn btn-primary btn-sm">Agregar</button>
+                <button id="botonModificarLinea" type="button" class="btn btn-primary btn-sm">Modificar</button>
+                <button id="botonEliminarLinea" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#confirmarEliminarLinea">Eliminar</button>
+                <button id="botonSalirLinea" type="button" class="btn btn-primary btn-sm">Salir</button>
+            </div>
+        </div>
+        <div id="panelPrograma" class="panel panel-primary">
+            <div class="panel-heading centrado">Justificativos | <span id="snombre_empresa"></span> | <span id="susuario_usuario"></span></div>
+            <div class="panel-body">
+                <form id="formPrograma">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Id</span>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="id_justificativo" name="id_justificativo" type="text" class="form-control input-sm" placeholder="Id" onkeypress="return SoloNumPositivos(event)">
+                        </div>
+                        <div class="col-md-1">
+                            <button id="botonBuscarIdJustificativo" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span>Motivo</span>
+                        </div>
+                        <div class="col-md-5">
+                            <input id="motivo_justificativo" name="motivo_justificativo" type="text" placeholder="Motivo de la justificacion" class="form-control input-sm" 
+                                   onkeyup="this.value =
+                                                   this.value.toUpperCase()">
+                        </div>
+                    </div>
+                </form>
+                <div id="detalle" hidden="">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Alumno</th>
+                                <th>Apellido</th>
+                                <th>Grado</th>
+                                <th>Seccion</th>
+                                <th>Turno</th>
+                                <th class="centrado">Fecha</th>
+                                <th class="centrado"><button onclick="agregarLinea()" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span></button></th>
+                            </tr>
+                        </thead>
+                        <tbody id="contenidoDetalle">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="panel-footer centrado">
+                <button id="botonAgregar" type="button" class="btn btn-primary btn-sm">Agregar</button>
+                <button id="botonModificar" type="button" class="btn btn-primary btn-sm">Modificar</button>
+                <button id="botonReporte" type="button" class="btn btn-primary btn-sm">Reporte</button>
+                <button id="botonEliminar" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#confirmarEliminar">Eliminar</button>
+                <button id="botonSalir" type="button" class="btn btn-primary btn-sm">Salir</button>
+            </div>
+        </div>
+        <div id="mensajes" class="well well-sm centrado">Mensajes del Sistema.</div>
+        <div class="modal fade" id="confirmarEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header  centrado">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Mensaje del Sistema</h4>
+                    </div>
+                    <div class="modal-body">
+                        Está seguro de eliminar estos datos?
+                    </div>
+                    <div class="modal-footer centrado">
+                        <button id="botonEliminarAlert" type="button" class="btn btn-primary btn-sm">Eliminar</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="confirmarEliminarLinea" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header  centrado">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabelLinea">Mensaje del Sistema</h4>
+                    </div>
+                    <div class="modal-body">
+                        Está seguro de eliminar esta linea?
+                    </div>
+                    <div class="modal-footer centrado">
+                        <button id="botonEliminarAlertLinea" type="button" class="btn btn-primary btn-sm">Eliminar</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="../../../js/jquery.min.js" type="text/javascript"></script>
+        <script src="../../../js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../../js/funciones.js" type="text/javascript"></script> 
+        <script src="js/funcion.js" type="text/javascript"></script>
+        <script>
+                                    verificarSesion(true);
+                                    $("#buscar").css("display", "none");
+                                    $("#panelLinea").css("display", "none");
+                                    $("#id_justificativo").focus();
+
+                                    //siguienteCampo("#id_alumno", "#nombre_alumno", false);
+
+                                    //siguienteCampo("#apellido_alumno", "#ci_alumno", false);
+
+                                    //if ($("#id_alumno").val() === "0") {
+                                    //siguienteCampo("#id_cliente", "#botonAgregar", false);
+
+                                    //} else {
+
+                                    //siguienteCampo("#id_cliente", "#botonModificar", false);
+                                    //}
+
+                                    $("#id_justificativo").focusout(function (event) {
+                                        if ($("#id_justificativo").val() === "") {
+                                            $("#id_justificativo").val("0");
+                                        }
+                                        buscarIdJustificativo();
+                                        var id = $("#id_justificativo").val();
+                                        $("#id_justificativo").val("0");
+                                        var img = "<img src='../../../img/alumnos/" + id + ".jpg' alt=''>";
+                                        $("#foto").html(img);
+
+                                    });
+                                       $("#id_inscripcion").focusout(function (event) {
+                                           if ($("#id_inscripcion").val() === "") {
+                                               $("#id_inscripcion").val("0");
+                                           }
+                                           buscarIdInscripcion();
+
+                                       });
+
+                                    $("#botonBuscarIdJustificativo").on('click', function () {
+                                        $("#buscar").load("buscarNombre.html");
+                                        $("#buscar").fadeIn("slow");
+                                        $("#panelPrograma").fadeOut("slow");
+                                    });
+                                       $("#botonBuscarIdInscripcion").on('click', function () {
+
+                                           $("#buscar").load("buscarNombreInscripcion.html");
+                                           $("#buscar").fadeIn("slow");
+                                           $("#panelLinea").fadeOut("slow");
+                                       });
+
+                                    $("#botonAgregar").on('click', function () {
+
+                                        agregarJustificativo();
+
+                                    });
+                                    
+                                    $("#botonReporte").on('click', function () {
+                                        location.href = "../../../frm/reportes/justificativos/index.html";
+                                    });
+                                    
+                                    $("#botonModificar").on('click', function () {
+
+                                        modificarJustificativo();
+
+                                    });
+                                    $("#botonEliminarAlert").on('click', function () {
+                                        eliminarJustificativo();
+                                        $('#confirmarEliminar').modal('hide');
+                                    });
+                                    $("#botonSalir").on('click', function () {
+                                        location.href = "../../../menu.html";
+                                    });
+
+                                    $("#botonAgregarLinea").on('click', function () {
+
+                                        agregarDetalleJustificativo();
+
+                                    });
+                                    $("#botonModificarLinea").on('click', function () {
+
+                                        modificarDetalleJustificativo();
+
+
+                                    });
+                                    $("#botonEliminarAlertLinea").on('click', function () {
+                                        eliminarDetalleJustificativo();
+                                        $('#confirmarEliminarLinea').modal('hide');
+                                    });
+                                    $("#botonSalirLinea").on('click', function () {
+                                        $("#panelLinea").fadeOut("slow");
+                                        $("#panelPrograma").fadeIn("slow");
+                                    });
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,81 @@
+<div id="panelBuscar" class="panel panel-primary">
+    <div class="panel-heading centrado">Buscar Inscripciones</div>
+    <div class="panel-body">
+        <form id="formBuscar">
+            <input type="hidden" id="bpagina" name="bpagina" value="1"/>
+            <div class="row">
+                <div class="col-md-1">
+                    <span>Cedula</span>
+                </div>
+                <div class="col-md-9">
+                    <input id="bnombre_inscripcion" name="bnombre_inscripcion" type="text"
+                           class="form-control input-sm" placeholder="N° de cedula del alumno">
+                </div>
+                <div class="col-md-2">
+                    <button id="botonBuscar" type="button" class="btn btn-primary
+                            btn-sm">Buscar</button>
+                </div>
+            </div>
+        </form>
+        <br>
+        <div id="resultado">
+            <table class="table table-boredered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Alumno</th>
+                        <th>Apellido</th>
+                        <th>Cedula</th>
+                        <th>Sede</th>
+                        <th>Grado</th>
+                        <th>Especialidad</th>
+                        <th>Seccion</th>
+                        <th>Turno</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="contenidoBusqueda">
+                </tbody>
+            </table>
+            <nav>
+                <ul class="pager">
+                    <li id="anterior"><a href="#"><span aria-hidden="true">&larr;</span></a></li>
+                    <li id="siguiente"><a href="#"><span aria-hidden="true">&rarr;</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="panel-footer centrado">
+        <button id="botonSalirBuscar" type="button" class="btn btn-primary btn-sm">Salir</button>
+    </div>
+</div>
+<script>
+    buscarNombreInscripcion();
+    $("#bnombre_inscripcion").focus();
+   // siguienteCampo("#bnombre_ninscripcion", "#botonBuscar", false);
+    $("#botonBuscar").on("click", function () {
+        $("#contenidoBusqueda").html("");
+        $("#bpagina").val("1");
+        buscarNombreInscripcion();
+        $("#bnombre_inscripcion").focus();
+    });
+    $("#anterior").on("click", function () {
+        $("#contenidoBusqueda").html("");
+        var pag = parseInt($("#bpagina").val());
+        if (pag > 1) {
+            $("#bpagina").val(pag - 1);
+        }
+        buscarNombreInscripcion();
+    });
+    $("#siguiente").on("click", function () {
+        $("#contenidoBusqueda").html("");
+        var pag = parseInt($("#bpagina").val());
+        $("$bpagina").val(pag + 1);
+        buscarNombreInscripcion();
+    });
+    $("#botonSalirBuscar").on('click', function () {
+        $("#buscar").fadeOut("slow");
+        $("#panelPrograma").fadeIn("slow");
+    });
+</script>

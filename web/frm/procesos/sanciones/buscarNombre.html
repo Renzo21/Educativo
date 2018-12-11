@@ -1,0 +1,95 @@
+<script>
+    function sololetras(e) {
+        var e;
+        key = e.keyCode || e.which;
+        tecla = String.fromCharCode(key).toLowerCase();
+        letras = "  áéíóúqwertyuiopasdfghjklñzxcvbnm";
+        especiales = [8, 37, 39, 46];
+
+        tecla_especial = false;
+        for (var i in especiales) {
+            if (key === especiales[i]) {
+                tecla_especial = true;
+                break;
+            }
+        }
+
+        if (letras.indexOf(tecla) === -1 && !tecla_especial)
+            return false;
+    }
+</script>
+
+<div id="panelBuscar" class="panel panel-primary">
+    <div class="panel-heading centrado">Buscar Sanciones</div>
+    <div class="panel-body">
+        <form id="formBuscar">
+            <input type="hidden" id="bpagina" name="bpagina" value="1" />
+            <div class="row">
+                <div class="col-md-1">
+                    <span>Sancion</span>
+                </div>
+                <div class="col-md-5">
+                    <input id="bnombre_sancion" name="bnombre_sancion" type="text" class="form-control input-sm" placeholder="obs de la sancion"
+                           onkeypress="return sololetras(event)">
+                </div>
+                <div class="col-md-2">
+                    <button id="botonBuscar" type="button" class="btn btn-primary btn-sm">Buscar</button>
+                </div>
+            </div>
+        </form>
+        <br>
+        <div id="resultado">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Tipo de Falta</th>
+                        <th>Descripcion</th>
+                    </tr>
+                </thead>
+                <tbody id="contenidoBusqueda">
+                </tbody>
+            </table>
+            <nav>
+                <ul class="pager">
+                    <li id="anterior"><a href="#"><span aria-hidden="true">&larr;</span> Anterior</a></li>
+                    <li id="siguiente"><a href="#">Siguiente <span aria-hidden="true">&rarr;</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="panel-footer centrado">
+        <button id="botonSalirBuscar" type="button" class="btn btn-primary btn-sm">Salir</button>
+    </div>
+</div>
+<script>
+    buscarNombreSancion();
+    $("#bnombre_sancion").focus();
+    //siguienteCampo("#bnombre_alumno", "#botonBuscar", false);
+    $("#botonBuscar").on("click", function () {
+        $("#contenidoBusqueda").html("");
+        $("#bpagina").val("1");
+        buscarNombreSancion();
+        $("#bnombre_sancion").focus();
+    });
+    $("#anterior").on("click", function () {
+        $("#contenidoBusqueda").html("");
+        var pag = parseInt($("#bpagina").val());
+        if (pag > 1) {
+            $("#bpagina").val(pag - 1);
+        }
+        buscarNombreSancion();
+    });
+    $("#siguiente").on("click", function () {
+        $("#contenidoBusqueda").html("");
+        var pag = parseInt($("#bpagina").val());
+        $("#bpagina").val(pag + 1);
+        buscarNombreSancion();
+    });
+
+    $("#botonSalirBuscar").on('click', function () {
+        $("#buscar").fadeOut("slow");
+        $("#panelPrograma").fadeIn("slow");
+    });
+</script>
+
